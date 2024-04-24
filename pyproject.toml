@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "new_game"
+version = "0.1.0"
+description = ""
+authors = ["kawanoichi <kawakawaichi1001@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pyxel = "^2.0.10"
+pytest = "^8.1.1"
+pillow = "^10.3.0"
+pyxel-universal-font = "^1.1.1"
+autopep8 = "^2.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
