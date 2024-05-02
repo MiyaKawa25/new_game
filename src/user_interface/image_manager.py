@@ -42,7 +42,7 @@ class ImageManager():
     def set_img_text_box(cls, img_name):
         """画像読み込みメソッド"""
         path = os.path.join(cls._resource_path, "interfaces", img_name)
-        cls.__load_img(path, cls._background_index)
+        cls.__load_img(path, cls._text_box_index)
 
     @classmethod
     def set_img_other(cls):

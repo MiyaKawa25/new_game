@@ -1,13 +1,10 @@
 import pyxel
-import os
-import sys
-SCENES_DIR_PATH = os.path.dirname(
-    os.path.abspath(__file__))
-sys.path.append(os.path.dirname(SCENES_DIR_PATH))  # src/を追加
-from scenes.scene import Scene  # noqa
-from scenes.map_scene import MapScene  # noqa
-from user_interface.image_manager import ImageManager  # noqa
-from user_interface.calculator import Calculator  # noqa
+if __name__ == "__main__":  # noqa
+    from path_option import *
+from scenes.scene import Scene
+from scenes.map_scene import MapScene
+from user_interface.image_manager import ImageManager
+from user_interface.calculator import Calculator
 
 
 class Title(Scene):
@@ -37,8 +34,11 @@ class Title(Scene):
             self.select_menu_index += 1
         elif pyxel.btnp(pyxel.KEY_DOWN):
             self.select_menu_index -= 1
-        self.changed_title_menu = self.title_menu.copy()  # 文字列リセット
+        # 文字列リセット
+        self.changed_title_menu = self.title_menu.copy()
+        # インデックス正規化
         self.select_menu_index %= len(self.changed_title_menu)
+        # "→"の付与
         self.changed_title_menu[self.select_menu_index] = "→ " + \
             self.changed_title_menu[self.select_menu_index]
 
@@ -58,7 +58,7 @@ class Title(Scene):
 
         # タイトルが中心に来るように計算
         x = Calculator.calu_text_x(self.game_title, 30)
-        
+
         # タイトル表示
         self.writer.draw(int(x), 50, self.game_title, self.title_font_size, 1)
 
@@ -76,4 +76,5 @@ class Title(Scene):
 
 if __name__ == "__main__":
     pyxel.init(240, 180)  # (W, H)
-    Title()
+    title = Title()
+    title.update_flame()

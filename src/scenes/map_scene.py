@@ -1,11 +1,8 @@
 import pyxel
-import os
-import sys
-SCENES_DIR_PATH = os.path.dirname(
-    os.path.abspath(__file__))
-sys.path.append(os.path.dirname(SCENES_DIR_PATH))  # src/を追加
-from user_interface.image_manager import ImageManager  # noqa
-from scenes.scene import Scene  # noqa
+if __name__ == "__main__":  # noqa
+    from path_option import *
+from user_interface.image_manager import ImageManager
+from scenes.scene import Scene
 
 
 class MapScene(Scene):
@@ -46,4 +43,5 @@ class MapScene(Scene):
 
 if __name__ == "__main__":
     pyxel.init(240, 180)  # (W, H)
-    MapScene()
+    map_scene = MapScene()
+    map_scene.update_flame()

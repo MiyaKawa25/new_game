@@ -1,11 +1,5 @@
-import os
-import sys
 import pyxel
 import PyxelUniversalFont as puf
-
-SCENES_DIR_PATH = os.path.dirname(
-    os.path.abspath(__file__))
-sys.path.append(os.path.dirname(SCENES_DIR_PATH))  # src/を追加
 from user_interface.message import Message  # noqa
 
 

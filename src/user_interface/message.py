@@ -1,9 +1,4 @@
 import pyxel
-import os
-import sys
-CURRENT_DIR_PATH = os.path.dirname(
-    os.path.abspath(__file__))
-sys.path.append(CURRENT_DIR_PATH)
 from user_interface.image_manager import ImageManager  # noqa
 
 

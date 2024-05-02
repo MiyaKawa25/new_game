@@ -9,12 +9,12 @@ class Game:
 
     def play(self):
         """シーンを再生するメソッド."""
+        # 初期シーンのインスタンス化
         self.current_scene = Title()
         while self.current_scene is not None:
-            # シーン
+            # シーン再生
             self.current_scene.update_flame()
-
-            # シーンの更新
+            # 次のシーンのインスタンス化
             self.current_scene = self.current_scene.next_scene()
 
 
