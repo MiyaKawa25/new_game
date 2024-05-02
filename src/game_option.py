@@ -2,7 +2,7 @@ import os
 SCRIPT_DIR_PATH = os.path.dirname(
     os.path.abspath(__file__))  # create_object_py/src
 PROJECT_DIR_PATH = os.path.dirname(SCRIPT_DIR_PATH)  # create_object_py
-DATA_DIR_PATH = os.path.join(PROJECT_DIR_PATH, "data")
+DATA_DIR_PATH = os.path.join(PROJECT_DIR_PATH, "resorces")
 
 
 class Option:
