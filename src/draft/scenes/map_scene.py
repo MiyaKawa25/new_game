@@ -2,10 +2,12 @@ from scene import Scene
 from enum import Enum
 from yaml import safe_load
 
+
 class MapSceneState(Enum):
-    STORY = 1
-    MOVE = 2
-    MENU = 3
+    STORY = 1   # ストーリー再生状態
+    MOVE = 2    # 移動可能状態
+    MENU = 3    # メニュー操作状態
+
 
 class MapScene(Scene):
     def __init__(self):
@@ -47,15 +49,18 @@ class MapScene(Scene):
 
         # テスト用
         while True:
-            print(f"*{self.story_event_id}************")
-            print(self.story_event)
+            # print(f"*{self.story_event_id}************")
+            # print(self.story_event)
             self.update("a")
             self.draw()
-            print("*************\n")
-
+            # print("*************\n")
 
     def update(self, user_input):
-        """パラメータの更新"""
+        """パラメータの更新.
+
+        Args:
+            user_input(str): ユーザのキー入力
+        """
         if self.state is MapSceneState.STORY:
             if user_input is not None:
                 self.__carry_event()
@@ -64,9 +69,9 @@ class MapScene(Scene):
             pass
         elif user_input is not None:
             # キー入力用のクラスを通じて、ユーザの入力受付
-                # WASDもしくは矢印キーの入力で移動
-                # BackSpaceでメニューUIの表示・マップ移動不可にする
-                # etc.
+            # WASDもしくは矢印キーの入力で移動
+            # BackSpaceでメニューUIの表示・マップ移動不可にする
+            # etc.
             pass
 
     def draw(self):
@@ -83,7 +88,7 @@ class MapScene(Scene):
         pass
 
     def __carry_event(self):
-        """イベントを進行する"""
+        """イベントを進行する."""
         self.story_event = self.story["events"][self.story_event_id]
         # 暗転判定
         if "blackout" in self.story_event.keys():
@@ -99,12 +104,13 @@ class MapScene(Scene):
                 # メッセージを表示しきった場合は初期化する
                 self.talker_id = None
                 self.message_id = 0
-                self.message_content = ""                
+                self.message_content = ""
         if "select" in self.story_event.keys():
             # 選択肢の選択を要求
             user_select = int(input(self.story_event["select"]))
             # ユーザ選択に応じて、遷移イベントを変更
-            self.story_event["next_event_id"] = list(self.story_event["select"][user_select].values())[0]
+            self.story_event["next_event_id"] = list(
+                self.story_event["select"][user_select].values())[0]
             print(self.story_event)
         if "sound" in self.story_event.keys():
             self.sound = self.story_event["sound"]
@@ -143,5 +149,7 @@ class MapScene(Scene):
             self.walker_id = None
             self.walk_speed = 0
             self.walk_route = None
+
+
 if __name__ == "__main__":
     scene = MapScene()

@@ -6,6 +6,7 @@ class Event:
     def run(self):
         return self.params
 
+
 class SayEvent(Event):
     def __init__(self, type, params):
         super().__init__(type, params)
@@ -15,10 +16,12 @@ class SayEvent(Event):
     def run(self):
         print(f"[{self.talker_id}]: {self.message}")
 
+
 class SelectEvent(Event):
     def __init__(self, type, params):
         super().__init__(type, params)
         self.selects = params["select"]
+
 
 class SoundEvent(Event):
     def __init__(self, type, params):

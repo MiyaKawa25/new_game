@@ -12,6 +12,7 @@ pytest = "^8.1.1"
 pillow = "^10.3.0"
 pyxel-universal-font = "^1.1.1"
 autopep8 = "^2.1.0"
+pyyaml = "^6.0.1"
 
 [build-system]
 requires = ["poetry-core"]

@@ -5,7 +5,6 @@ class Game:
 
     def play(self):
         ## 開始準備の処理 ##
-        
 
         while self.params.is_playing:
             # ユーザの操作を取得
