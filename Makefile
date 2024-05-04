@@ -8,9 +8,9 @@ run:
 game:
 	poetry run python3 src/game.py
 title:
-	poetry run python3 src/game_title.py
-story1:
-	poetry run python3 src/story_01.py
+	poetry run python3 src/scenes/title.py
+map:
+	poetry run python3 src/scenes/map_scene.py
 
 # フォーマット
 format:
