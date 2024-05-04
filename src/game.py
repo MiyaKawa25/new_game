@@ -1,5 +1,5 @@
 import pyxel
-from scenes.title import TitleScene
+from scenes.title_scene import TitleScene
 
 
 class Game:

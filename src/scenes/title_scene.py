@@ -76,5 +76,5 @@ class TitleScene(Scene):
 
 if __name__ == "__main__":
     pyxel.init(240, 180)  # (W, H)
-    title = Title()
+    title = TitleScene()
     title.update_flame()
