@@ -1,5 +1,5 @@
 import pyxel
-from scenes.title import Title
+from scenes.title import TitleScene
 
 
 class Game:
@@ -10,7 +10,7 @@ class Game:
     def play(self):
         """シーンを再生するメソッド."""
         # 初期シーンのインスタンス化
-        self.current_scene = Title()
+        self.current_scene = TitleScene()
         while self.current_scene is not None:
             # シーン再生
             self.current_scene.update_flame()

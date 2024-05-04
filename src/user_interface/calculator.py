@@ -3,7 +3,7 @@ import pyxel
 
 class Calculator:
     @staticmethod
-    def calu_text_size(text):
+    def calc_text_size(text):
         """文字数カウント関数.
         全角を1, アルファベットを0.5でカウントする。
         Args:
@@ -24,7 +24,7 @@ class Calculator:
         return count
 
     @staticmethod
-    def calu_text_x(text, font_size):
+    def calc_text_x(text, font_size):
         """テキストを画面中心に配置する際のx座標を求める関数.
         Args:
             text(str): テキスト
@@ -34,5 +34,5 @@ class Calculator:
             double: テキストが画面中心にくるためのx座標
         """
         adjustment = 4
-        text_size = Calculator.calu_text_size(text)
+        text_size = Calculator.calc_text_size(text)
         return (pyxel.width - (font_size * text_size)) / 2 + adjustment

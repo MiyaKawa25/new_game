@@ -7,7 +7,7 @@ from user_interface.image_manager import ImageManager
 from user_interface.calculator import Calculator
 
 
-class Title(Scene):
+class TitleScene(Scene):
 
     def __init__(self):
         super().__init__()
@@ -57,7 +57,7 @@ class Title(Scene):
                   0, 0, pyxel.width, pyxel.height)  # 背景
 
         # タイトルが中心に来るように計算
-        x = Calculator.calu_text_x(self.game_title, 30)
+        x = Calculator.calc_text_x(self.game_title, 30)
 
         # タイトル表示
         self.writer.draw(int(x), 50, self.game_title, self.title_font_size, 1)
@@ -65,7 +65,7 @@ class Title(Scene):
         # セレクトボタンの表示
         y = 100
         for button in self.changed_title_menu:
-            x = Calculator.calu_text_x(button, 20)
+            x = Calculator.calc_text_x(button, 20)
             self.writer.draw(int(x), y, button, self.select_font_size, 1)
             y += 30
 
