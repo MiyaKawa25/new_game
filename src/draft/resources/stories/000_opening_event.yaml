@@ -1,0 +1,97 @@
+# オープニングイベント
+# イベント発生時のパラメータの状態
+before:
+  opening_event: true
+# イベント完了後のパラメータの状態
+after:
+  opening_event: false
+# イベントリスト
+events:
+  0:
+    blackout: true
+  1:
+    say:
+      talker_id: 1
+      messages:
+        - "{player_name}！"
+        - "{player_name}!!さっさと起きな！"
+  2:
+    sound: バシッ！！！(SE再生)
+  3:
+    blackout: false
+  4:
+    say:
+      talker_id: 1
+      messages:
+        - まったく。今日がなんの日か忘れたのかい？
+  5:
+    select:
+      - 建国祭: 5a
+      - 喧嘩: 5b
+      - 忘れた: 5c
+
+  5a:
+    say:
+      talker_id: 1
+      messages:
+        - わかってるならさっさと準備する！
+    next_event_id: 6
+  
+  5b:
+    say:
+      talker_id: 1
+      messages:
+        - そんなのはいつものことだろう。他には？
+    next_event_id: 5b'
+  5b':
+    select:
+      - 建国祭: 5a
+      - 忘れた: 5c
+  5c:
+    say:
+      talker_id: 1
+      messages:
+        - そうかい。ならたっぷりとかたってやろうじゃないか。
+        - 今日は、○○の建国1000年目の祭さ。
+        - 建国時代は、あたしら魔物に厳しい時代でね。
+        - そもそも...
+    next_event_id: 5c'
+  5c':
+    select:
+      - もう大丈夫: 5c'a
+      - それでそれで？: 5c'b
+  5c'a:
+    say:
+      talker_id: 1
+      messages:
+        - わかってるならさっさと準備する！
+    next_event_id: 6
+  5c'b:
+    say:
+      talker_id: 1
+      messages:
+        - なんで止めないんだい！さっさと準備しな！
+    next_event_id: 6
+  6:
+    say:
+      talker_id: 1
+      messages:
+        - わかったね？
+  7:
+    select:
+      - はい: 8
+      - いいえ: 6 
+  8:
+    walk:
+      walker_id: 1
+      speed: 1
+      route:
+        - turn: back
+        - move: forward
+        - move: forward
+        - move: forward
+        - turn: left
+        - move: forward
+        - move: forward
+        - move: forward
+        - move: forward
