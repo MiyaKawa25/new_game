@@ -11,10 +11,13 @@ title:
 	poetry run python3 src/scenes/title.py
 map:
 	poetry run python3 src/scenes/map_scene.py
-
 # フォーマット
 format:
 	poetry run python -m autopep8 -i -r src/
+
+# テスト実行
+test:
+	poetry run pytest
 
 # その他
 zikken:
