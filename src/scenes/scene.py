@@ -30,7 +30,13 @@ class Scene:
             pyxel.flip()  # フレームを更新
 
     def update(self):
-        """オーバーライド前提メソッド."""
+        """オーバーライド前提メソッド.
+        NOTE:
+            # 長押し非対応
+            pyxel.btnp(pyxel.KEY_UP)
+            # 長押し対応
+            pyxel.btn(pyxel.KEY_UP)
+        """
         pass
 
     def draw(self):

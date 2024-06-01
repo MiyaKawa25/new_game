@@ -1,10 +1,11 @@
 import pyxel
 from scenes.title_scene import TitleScene
+from game_option import Option as Op
 
 
 class Game:
     def __init__(self):
-        pyxel.init(240, 180)  # (W, H)
+        pyxel.init(Op.window_w, Op.window_h)
         self.play()
 
     def play(self):
