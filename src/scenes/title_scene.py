@@ -15,7 +15,6 @@ class TitleScene(Scene):
 
         # 画像関連
         ImageManager.set_img_background("white_256_192.png")
-        # ImageManager.set_img_background("title_background_240_180.png")
 
         # タイトル関連
         self.game_title = "TITLE"
@@ -84,6 +83,7 @@ class TitleScene(Scene):
 
 
 if __name__ == "__main__":
-    pyxel.init(240, 180)  # (W, H)
+    from game_option import Option as Op
+    pyxel.init(Op.window_w, Op.window_h)  # (W, H)
     title = TitleScene()
     title.update_flame()

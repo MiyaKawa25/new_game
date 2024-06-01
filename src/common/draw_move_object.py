@@ -24,7 +24,7 @@ class DrawMoveObject:
         # 表示するタイル座標
         self.__tile_x = tile_x
         self.__tile_y = tile_y
-        
+
         # 最初の場所からの移動したpixel
         self.__current_location_x = 0
         self.__current_location_y = 0

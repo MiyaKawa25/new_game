@@ -18,6 +18,7 @@ class TileMap():
 
 
 if __name__ == "__main__":
-    pyxel.init(240, 180)  # (W, H)
+    from game_option import Option as Op
+    pyxel.init(Op.window_w, Op.window_h)  # (W, H)
     map_scene = TileMap()
     map_scene.set_map()

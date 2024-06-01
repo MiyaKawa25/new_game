@@ -4,12 +4,16 @@ RESOURCE_MAP_PATH := resources/worlds/maps
 help:
 	@echo "ゲームを開始する"
 	@echo " $$ make run"
+	@echo "フォーマットする"
+	@echo " $$ make format"
+	@echo "パス設定ファイルの正規化"
+	@echo " $$ make path_option_normalization"
+	@echo "タイルマップの作成・編集"
+	@echo " $$ make create_map"
 
 # ゲーム実行
 run:
 	poetry run python3 src
-game:
-	poetry run python3 src/game.py
 
 # フォーマット
 format:
