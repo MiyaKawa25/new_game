@@ -4,7 +4,7 @@ if __name__ == "__main__":  # noqa
 from user_interface.tile_map import TileMap
 from scenes.scene import Scene
 from game_option import Option as Op
-from interface.draw_human import DrawHuman
+from common.draw_human import DrawHuman
 
 
 class TestScene(Scene):
@@ -42,10 +42,10 @@ class TestScene(Scene):
         pyxel.bltm(0, 0, 0, 0, 0, Op.window_w, Op.window_h)
 
         # キャラクター
-        pyxel.bltm((Op.window_w//2)-8+self.human.get_current_location_x(),
-                   (Op.window_h//2)-8+self.human.get_current_location_y(),
+        pyxel.bltm((Op.window_w//2)-8+self.human.get_current_location_x,
+                   (Op.window_h//2)-8+self.human.get_current_location_y,
                    0,
-                   self.human.get_tile_x(), self.human.get_tile_y(),
+                   self.human.get_tile_x, self.human.get_tile_y,
                    16, 16, 0)
 
     def next_scene(self):

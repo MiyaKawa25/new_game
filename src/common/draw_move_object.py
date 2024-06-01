@@ -4,21 +4,32 @@ if __name__ == "__main__":  # noqa
 from game_option import Option as Op
 
 
-class DrawHuman:
+class DrawMoveObject:
     """操作するキャラクターの描画する座標を管理するクラス."""
 
-    # 表示するタイル座標
-    __tile_coordi_up = [0, Op.window_h]
-    __tile_coordi_right = [48, Op.window_h]
-    __tile_coordi_down = [16, Op.window_h]
-    __tile_coordi_left = [32, Op.window_h]
+    def __init__(self,
+                 tile_coordi_up: list,
+                 tile_coordi_right: list,
+                 tile_coordi_down: list,
+                 tile_coordi_left: list,
+                 tile_x: int,
+                 tile_y: int,
+                 move_pixel: int):
+        # Objectが描かれているタイル上の座標
+        self.__tile_coordi_up = tile_coordi_up
+        self.__tile_coordi_right = tile_coordi_right
+        self.__tile_coordi_down = tile_coordi_down
+        self.__tile_coordi_left = tile_coordi_left
 
-    def __init__(self, move_pixel=2):
         # 表示するタイル座標
-        self.__tile_x = self.__tile_coordi_down[0]
-        self.__tile_y = self.__tile_coordi_down[1]
+        self.__tile_x = tile_x
+        self.__tile_y = tile_y
+        
+        # 最初の場所からの移動したpixel
         self.__current_location_x = 0
         self.__current_location_y = 0
+
+        # 移動pixel
         self.__move_pixel = move_pixel
 
     def look_up(self):
@@ -41,24 +52,22 @@ class DrawHuman:
         self.__tile_x, self.__tile_y = self.__tile_coordi_left
         self.__current_location_x -= self.__move_pixel
 
+    @property
     def get_tile_x(self):
         """X座標を返すGetter."""
         return self.__tile_x
 
+    @property
     def get_tile_y(self):
         """Y座標を返すGetter."""
         return self.__tile_y
 
+    @property
     def get_current_location_x(self):
         """X座標を返すGetter."""
         return self.__current_location_x
 
+    @property
     def get_current_location_y(self):
         """Y座標を返すGetter."""
         return self.__current_location_y
-
-
-if __name__ == "__main__":
-    dh = DrawHuman()
-    print(dh.get_tile_x())
-    print(dh.get_tile_y())
