@@ -4,7 +4,7 @@ if __name__ == "__main__":  # noqa
 from user_interface.tile_map import TileMap
 from scenes.scene import Scene
 from game_option import Option as Op
-from common.draw_human import DrawHuman
+from user_interface.draw_human import DrawHuman
 
 
 class TestScene(Scene):
@@ -23,12 +23,16 @@ class TestScene(Scene):
         # 決定ボタン(SPACE)
         if pyxel.btn(pyxel.KEY_UP):
             self.human.look_up()
+            self.human.move_up()
         elif pyxel.btn(pyxel.KEY_RIGHT):
             self.human.look_right()
+            self.human.move_right()
         elif pyxel.btn(pyxel.KEY_DOWN):
             self.human.look_down()
+            self.human.move_down()
         elif pyxel.btn(pyxel.KEY_LEFT):
             self.human.look_left()
+            self.human.move_left()
 
     def draw(self):
         """描画を行う関数.

@@ -2,7 +2,7 @@ if __name__ == "__main__":  # noqa
     from path_option import *
 
 from game_option import Option as Op
-from common.draw_move_object import DrawMoveObject
+from user_interface.draw_move_object import DrawMoveObject
 
 
 class DrawHuman(DrawMoveObject):

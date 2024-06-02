@@ -1,8 +1,6 @@
 if __name__ == "__main__":  # noqa
     from path_option import *
 
-from game_option import Option as Op
-
 
 class DrawMoveObject:
     """操作するキャラクターの描画する座標を管理するクラス."""
@@ -35,21 +33,33 @@ class DrawMoveObject:
     def look_up(self):
         """上(奥)を向く."""
         self.__tile_x, self.__tile_y = self.__tile_coordi_up
-        self.__current_location_y -= self.__move_pixel
 
     def look_right(self):
         """右を向く."""
         self.__tile_x, self.__tile_y = self.__tile_coordi_right
-        self.__current_location_x += self.__move_pixel
 
     def look_down(self):
         """下(手前)を向く."""
         self.__tile_x, self.__tile_y = self.__tile_coordi_down
-        self.__current_location_y += self.__move_pixel
 
     def look_left(self):
         """左を向く."""
         self.__tile_x, self.__tile_y = self.__tile_coordi_left
+
+    def move_up(self):
+        """上(奥)に移動."""
+        self.__current_location_y -= self.__move_pixel
+
+    def move_right(self):
+        """右に移動."""
+        self.__current_location_x += self.__move_pixel
+
+    def move_down(self):
+        """下(手前)に移動."""
+        self.__current_location_y += self.__move_pixel
+
+    def move_left(self):
+        """左に移動."""
         self.__current_location_x -= self.__move_pixel
 
     @property
