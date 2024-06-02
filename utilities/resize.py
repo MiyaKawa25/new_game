@@ -2,14 +2,13 @@ from PIL import Image
 import os
 SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR_PATH = os.path.dirname(SCRIPT_DIR_PATH) # new_game
-DATA_PATH = os.path.join(PROJECT_DIR_PATH, "data")
+DATA_PATH = os.path.join(PROJECT_DIR_PATH, "resources", "worlds", "maps")
 
 # """OPTION
-image_path = os.path.join(DATA_PATH, "white.png")
-save_path = os.path.join(DATA_PATH, "white_240_180.png")
-# save_path = os.path.join(DATA_PATH, "title_background_320_240.png")
-resize_w = 240
-resize_h = 180
+resize_w = 256
+resize_h = 192
+image_path = os.path.join(DATA_PATH, "white_240_180.png")
+save_path = os.path.join(DATA_PATH, f"white_{resize_w}_{resize_h}.png")
 # """
 
 

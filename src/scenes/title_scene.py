@@ -3,6 +3,7 @@ if __name__ == "__main__":  # noqa
     from path_option import *
 from scenes.scene import Scene
 from scenes.map_scene import MapScene
+from scenes.test_scene import TestScene
 from user_interface.image_manager import ImageManager
 from user_interface.calculator import Calculator
 
@@ -13,7 +14,7 @@ class TitleScene(Scene):
         super().__init__()
 
         # 画像関連
-        ImageManager.set_img_background("title_background_240_180.png")
+        ImageManager.set_img_background("white_256_192.png")
 
         # タイトル関連
         self.game_title = "TITLE"
@@ -23,6 +24,7 @@ class TitleScene(Scene):
         self.title_menu = ["つづきから", "はじめから"]
         self.select_font_size = 15
         self.select_menu_index = 0
+        self.next_scene_index = 0
 
         # 実行しているシーンを見極めるための変数
         self.execute_scene_name = "Title"
@@ -32,8 +34,11 @@ class TitleScene(Scene):
         # ↑↓ボタン関連の更新
         if pyxel.btnp(pyxel.KEY_UP):
             self.select_menu_index += 1
+            self.next_scene_index += 1
         elif pyxel.btnp(pyxel.KEY_DOWN):
             self.select_menu_index -= 1
+            self.next_scene_index += 1
+        self.next_scene_index %= 2
         # 文字列リセット
         self.changed_title_menu = self.title_menu.copy()
         # インデックス正規化
@@ -71,10 +76,14 @@ class TitleScene(Scene):
 
     def next_scene(self):
         """次のシーンを返すメソッド."""
-        return MapScene()
+        if self.next_scene_index == 0:
+            return TestScene()
+        else:
+            return MapScene()
 
 
 if __name__ == "__main__":
-    pyxel.init(240, 180)  # (W, H)
+    from game_option import Option as Op
+    pyxel.init(Op.window_w, Op.window_h)  # (W, H)
     title = TitleScene()
     title.update_flame()
