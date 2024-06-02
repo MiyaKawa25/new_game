@@ -37,6 +37,11 @@ test_scene:
 draw_human:
 	poetry run python3 src/interface/draw_human.py
 
+# テスト実行
+test:
+	poetry run pytest
+
+# その他
 zikken:
 	poetry run python3 src/zikken.py
 
