@@ -5,6 +5,9 @@ from user_interface.tile_map import TileMap
 from scenes.scene import Scene
 from game_option import Option as Op
 from user_interface.draw_human import DrawHuman
+from user_interface.draw_slime import DrawSlime
+from user_interface.draw_enemy import DrawEnemy
+from user_interface.direction import Direction
 
 
 class TestScene(Scene):
@@ -13,26 +16,32 @@ class TestScene(Scene):
 
         # 画像関連
         TileMap.set_map("sample.pyxres")
-        self.human = DrawHuman()
-
+        self.control_character = DrawSlime(first_location_x=(Op.window_w//2)-8,  # 中心
+                                           first_location_y=(Op.window_h//2)-8,  # 中心
+                                           first_direction=Direction.DOWN.value,
+                                           move_pixel=2)
+        self.enemy1 = DrawEnemy(first_location_x=(Op.window_w//4)-8,
+                                first_location_y=(Op.window_h//4)-8,
+                                first_direction=Direction.DOWN.value,
+                                move_pixel=2)
         # 実行しているシーンを見極めるための変数
         self.execute_scene_name = "Testscene"
 
     def update(self):
         """ゲームの状態を更新する."""
-        # 決定ボタン(SPACE)
+        push_key_flag = None  # Keyが押されたかの判断
         if pyxel.btn(pyxel.KEY_UP):
-            self.human.look_up()
-            self.human.move_up()
+            push_key_flag = Direction.UP.value
         elif pyxel.btn(pyxel.KEY_RIGHT):
-            self.human.look_right()
-            self.human.move_right()
+            push_key_flag = Direction.RIGHT.value
         elif pyxel.btn(pyxel.KEY_DOWN):
-            self.human.look_down()
-            self.human.move_down()
+            push_key_flag = Direction.DOWN.value
         elif pyxel.btn(pyxel.KEY_LEFT):
-            self.human.look_left()
-            self.human.move_left()
+            push_key_flag = Direction.LEFT.value
+
+        if push_key_flag is not None:
+            self.control_character.update_direction(push_key_flag)
+            self.control_character.move_object(push_key_flag)
 
     def draw(self):
         """描画を行う関数.
@@ -45,12 +54,20 @@ class TestScene(Scene):
         # 背景
         pyxel.bltm(0, 0, 0, 0, 0, Op.window_w, Op.window_h)
 
-        # キャラクター
-        pyxel.bltm((Op.window_w//2)-8+self.human.get_current_location_x,
-                   (Op.window_h//2)-8+self.human.get_current_location_y,
+        # 操作キャラ
+        self.draw_object(self.control_character)
+
+        # 敵1
+        self.draw_object(self.enemy1)
+
+    def draw_object(self, draw_object):
+        """オブジェクト描画用関数."""
+        pyxel.bltm(draw_object.get_current_location_x,
+                   draw_object.get_current_location_y,
                    0,
-                   self.human.get_tile_x, self.human.get_tile_y,
-                   16, 16, 0)
+                   draw_object.get_tile_coordi_x, draw_object.get_tile_coordi_y,
+                   draw_object.get_tile_size_x, draw_object.get_tile_size_y,
+                   0)
 
     def next_scene(self):
         """次のシーンを返すメソッド."""
