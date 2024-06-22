@@ -5,6 +5,7 @@ from user_interface.image_manager import ImageManager  # noqa
 class Message:
     def __init__(self):
         ImageManager.set_img_text_box("text_box_240_48.png")
+        self.text = ""
 
     def show_text_box(self):
         """テキストボックスの表示.
@@ -13,3 +14,4 @@ class Message:
         """
         pyxel.blt(0, pyxel.height-48, ImageManager.text_box_index(),
                   0, 0, pyxel.width, 48)
+        pyxel.text(3, pyxel.height-48+3, self.text, 7)
