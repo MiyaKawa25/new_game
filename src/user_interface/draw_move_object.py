@@ -17,7 +17,8 @@ class DrawMoveObject:
                  tile_size_y: int = 16,
                  first_location_x: int = 0,
                  first_location_y: int = 0,
-                 move_pixel: int = 12):
+                 move_pixel: int = 12,
+                 max_hp: int = 100):
         """
         Args:
             tile_coordi_up: 奥向きのオブジェクトのタイル座標
@@ -51,6 +52,11 @@ class DrawMoveObject:
         # 最初の場所からの移動したpixel
         self.__current_location_x = first_location_x
         self.__current_location_y = first_location_y
+
+        # HPゲージの作成
+        self.__gauge_max_hp = 100
+        self.__gauge_hp = 80
+        # self.__gauge_hp = self.__gauge_max_hp
 
     def update_direction(self, dirction: int):
         """オブジェクトの表示タイル更新関数.
@@ -87,6 +93,13 @@ class DrawMoveObject:
                 # マップ内にいれば座標を更新
                 self.__current_location_x -= self.__move_pixel
 
+    
+    def update_hp(self, add_hp):
+        """HPの値を変更する関数.
+        減らす場合は負の値を受け取る
+        """
+        self.__gauge_hp += add_hp
+    
     @property
     def get_tile_coordi_x(self):
         """オブジェクトのタイルマップ上x座標返すGetter."""
@@ -116,3 +129,13 @@ class DrawMoveObject:
     def get_current_location_y(self):
         """現在座標yを返すGetter."""
         return self.__current_location_y
+    
+    @property
+    def get_hp_current(self):
+        """現在のHP返すGetter."""
+        return self.__gauge_hp
+    
+    @property
+    def get_hp_max(self):
+        """現在のHP返すGetter."""
+        return self.__gauge_max_hp

@@ -1,0 +1,17 @@
+{
+    "Sheep": {
+        "NAME": "Sheep",
+        "LEVEL": 1,
+        "HP_MAX": 80,
+        "HP_CURRENT": 80,
+        "ATK": 20
+    },
+
+    "None": {
+        "NAME": "None",
+        "LEVEL": 1,
+        "HP_MAX": 100,
+        "HP_CURRENT": 100,
+        "ATK": 20
+    }
+}
