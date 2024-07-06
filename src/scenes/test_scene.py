@@ -1,18 +1,23 @@
 import pyxel
-if __name__ == "__main__":  # noqa
-    from path_option import *
+import os
+import json
 from user_interface.tile_map import TileMap
 from scenes.scene import Scene
 from game_option import Option as Op
-# from user_interface.draw_human import DrawHuman
-from src.user_interface.draw_player import DrawPlayer
+from user_interface.draw_player import DrawPlayer
 from user_interface.draw_enemy import DrawEnemy
 from user_interface.direction import Direction
 
+PROJECT_PATH = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+STAGE_JSON_PATH = os.path.join(
+    PROJECT_PATH, "resources", "stage", "stage01.json")
+
 
 class TestScene(Scene):
-    
+
     ENEMY_LIST = ["Sheep"]
+    ENEMY_NUM_LIST = [2]
 
     def __init__(self):
         super().__init__()
@@ -22,16 +27,40 @@ class TestScene(Scene):
 
         # 画像関連
         TileMap.set_map("sample.pyxres")
-        self.control_character = DrawPlayer(first_location_x=(Op.window_w//2)-8,  # 中心
-                                           first_location_y=(Op.window_h//2)-8,  # 中心
-                                           first_direction=Direction.DOWN.value,
-                                           move_pixel=2)
-        self.enemy1 = DrawEnemy(first_location_x=(Op.window_w//4)-8,
-                                first_location_y=(Op.window_h//4)-8,
-                                first_direction=Direction.DOWN.value,
-                                move_pixel=2)
+
+        self.control_character = None
+        self.enemy_object_list = []
+
         # 実行しているシーンを見極めるための変数
         self.execute_scene_name = "Testscene"
+
+        self.create_object()
+
+    def create_object(self):
+        """キャラクターオブジェクトを生成する関数."""
+        with open(STAGE_JSON_PATH, 'r') as f:
+            character_info = json.load(f)
+
+        # Player
+        player = character_info["Player"]
+        self.control_character = DrawPlayer(chara_name=player["name"],
+                                            # 中心
+                                            first_location_x=player["location_x"],
+                                            # 中心
+                                            first_location_y=player["location_y"],
+                                            first_direction=getattr(Direction, player["direction"]).value)
+
+        # Enemy
+        # Jsonファイルに記述しているキャラのインスタンスを生成
+        for key, value in character_info.items():
+            if key == "Player":
+                continue
+            object = DrawEnemy(
+                enemy_name=value["name"],
+                first_location_x=value["location_x"],
+                first_location_y=value["location_y"],
+                first_direction=getattr(Direction, value["direction"]).value)
+            self.enemy_object_list.append(object)
 
     def update(self):
         """ゲームの状態を更新する."""
@@ -64,8 +93,9 @@ class TestScene(Scene):
         self.draw_object(self.control_character)
         self.draw_object_hp(self.control_character)
 
-        # 敵1
-        # self.draw_object(self.enemy1)
+        # 複数の敵を表示
+        for enemy in self.enemy_object_list:
+            self.draw_object(enemy)
 
     def draw_object(self, object):
         """オブジェクト描画用関数.
@@ -77,11 +107,11 @@ class TestScene(Scene):
                    object.get_tile_coordi_x, object.get_tile_coordi_y,
                    object.get_tile_size_x, object.get_tile_size_y,
                    0)
-        
+
     def draw_object_hp(self, object):
         """オブジェクトのHPゲージを描画する関数.
         pyxel.rect(左上x, 左上y, x幅, y幅, カラー)
-        
+
         # パレットカラー
             https://note.com/syun77/n/nf0f094854644#:~:text=%E3%83%91%E3%83%AC%E3%83%83%E3%83%88%E3%82%AB%E3%83%A9%E3%83%BC%E3%81%AF%E4%BB%A5%E4%B8%8B%E3%81%AE%E3%82%82%E3%81%AE%E3%81%8C%E7%94%A8%E6%84%8F%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82
         """
@@ -108,13 +138,7 @@ class TestScene(Scene):
                    hp_gauge_wide_current,
                    height_hp-2,
                    12)
-        
+
     def next_scene(self):
         """次のシーンを返すメソッド."""
         return None
-
-
-if __name__ == "__main__":
-    pyxel.init(Op.window_w, Op.window_h)  # (W, H)
-    map_scene = TestScene()
-    map_scene.update_flame()

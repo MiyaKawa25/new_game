@@ -42,7 +42,6 @@ sys.path.append(SRC_PATH)
 RESOURCES_PATH = os.path.join(PROJECT_PATH, "resources")
 
 
-
 # tile/の追加
 append_tile_path()
 

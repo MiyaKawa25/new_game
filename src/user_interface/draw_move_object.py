@@ -8,22 +8,22 @@ class DrawMoveObject:
     """操作するキャラクターの描画する座標を管理するクラス."""
 
     def __init__(self,
-                 tile_coordi_up: list,
+                 tile_coordi_top: list,
                  tile_coordi_right: list,
-                 tile_coordi_down: list,
+                 tile_coordi_bottom: list,
                  tile_coordi_left: list,
                  first_direction: int,
-                 tile_size_x: int = 16,
-                 tile_size_y: int = 16,
-                 first_location_x: int = 0,
-                 first_location_y: int = 0,
-                 move_pixel: int = 12,
-                 max_hp: int = 100):
+                 tile_size_x: int,
+                 tile_size_y: int,
+                 first_location_x: int,
+                 first_location_y: int,
+                 move_pixel: int,
+                 max_hp: int):
         """
         Args:
-            tile_coordi_up: 奥向きのオブジェクトのタイル座標
+            tile_coordi_top: 奥向きのオブジェクトのタイル座標
             tile_coordi_right: 右向きのオブジェクトのタイル座標
-            tile_coordi_down: 手前向きのオブジェクトのタイル座標
+            tile_coordi_bottom: 手前向きのオブジェクトのタイル座標
             tile_coordi_left: 左向きのオブジェクトのタイル座標
             first_direction: int,
             tile_size_x: int = 16,
@@ -33,9 +33,9 @@ class DrawMoveObject:
             move_pixel: 移動速度
         """
         # Objectが描かれているタイル上の座標
-        self.__tile_coordi_up = tile_coordi_up
+        self.__tile_coordi_top = tile_coordi_top
         self.__tile_coordi_right = tile_coordi_right
-        self.__tile_coordi_down = tile_coordi_down
+        self.__tile_coordi_bottom = tile_coordi_bottom
         self.__tile_coordi_left = tile_coordi_left
 
         # オブジェクトの向く方向を管理する変数(Directionのvalue)
@@ -54,20 +54,19 @@ class DrawMoveObject:
         self.__current_location_y = first_location_y
 
         # HPゲージの作成
-        self.__gauge_max_hp = 100
-        self.__gauge_hp = 80
-        # self.__gauge_hp = self.__gauge_max_hp
+        self.__gauge_max_hp = max_hp
+        self.__gauge_hp = max_hp
 
     def update_direction(self, dirction: int):
         """オブジェクトの表示タイル更新関数.
         オブジェクトの向きによって表示するタイル座標を変更.
         """
         if dirction == Direction.UP.value:
-            self.__now_tile_coordi = self.__tile_coordi_up
+            self.__now_tile_coordi = self.__tile_coordi_top
         elif dirction == Direction.RIGHT.value:
             self.__now_tile_coordi = self.__tile_coordi_right
         elif dirction == Direction.DOWN.value:
-            self.__now_tile_coordi = self.__tile_coordi_down
+            self.__now_tile_coordi = self.__tile_coordi_bottom
         elif dirction == Direction.LEFT.value:
             self.__now_tile_coordi = self.__tile_coordi_left
 
@@ -93,13 +92,12 @@ class DrawMoveObject:
                 # マップ内にいれば座標を更新
                 self.__current_location_x -= self.__move_pixel
 
-    
     def update_hp(self, add_hp):
         """HPの値を変更する関数.
         減らす場合は負の値を受け取る
         """
         self.__gauge_hp += add_hp
-    
+
     @property
     def get_tile_coordi_x(self):
         """オブジェクトのタイルマップ上x座標返すGetter."""
@@ -129,12 +127,12 @@ class DrawMoveObject:
     def get_current_location_y(self):
         """現在座標yを返すGetter."""
         return self.__current_location_y
-    
+
     @property
     def get_hp_current(self):
         """現在のHP返すGetter."""
         return self.__gauge_hp
-    
+
     @property
     def get_hp_max(self):
         """現在のHP返すGetter."""
