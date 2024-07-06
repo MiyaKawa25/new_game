@@ -1,5 +1,5 @@
 import pyxel
-from user_interface.image_manager import ImageManager  # noqa
+from user_interface.image_manager import ImageManager
 
 
 class Message:

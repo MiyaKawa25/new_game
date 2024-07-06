@@ -1,5 +1,3 @@
-if __name__ == "__main__":  # noqa
-    from path_option import *
 from user_interface.direction import Direction
 from game_option import Option as Op
 

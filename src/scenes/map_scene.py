@@ -1,6 +1,4 @@
 import pyxel
-if __name__ == "__main__":  # noqa
-    from path_option import *
 from user_interface.image_manager import ImageManager
 from scenes.scene import Scene
 
@@ -39,9 +37,3 @@ class MapScene(Scene):
     def next_scene(self):
         """次のシーンを返すメソッド."""
         return None
-
-
-if __name__ == "__main__":
-    pyxel.init(240, 180)  # (W, H)
-    map_scene = MapScene()
-    map_scene.update_flame()
