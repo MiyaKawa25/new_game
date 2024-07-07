@@ -1,6 +1,4 @@
 import pyxel
-if __name__ == "__main__":  # noqa
-    from path_option import *
 from scenes.scene import Scene
 from scenes.map_scene import MapScene
 from scenes.test_scene import TestScene

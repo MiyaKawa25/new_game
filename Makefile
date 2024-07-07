@@ -21,8 +21,7 @@ format:
 
 path_option_normalization:
 	cp -i path_option.py src/scenes/path_option.py
-	cp -i path_option.py src/interface/path_option.py
-# cp -i path_option.py src/user_interface/path_option.py
+	cp -i path_option.py src/user_interface/path_option.py
 
 # 作業用(ゲーム実行)
 title:

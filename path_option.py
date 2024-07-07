@@ -20,7 +20,7 @@ import sys
 
 def append_tile_path():
     sys.path.append(
-        os.path.join(SRC_PATH, "resources", "worlds", "tile"))
+        os.path.join(RESOURCES_PATH, "worlds", "tile"))
 
 
 CURRENT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -37,9 +37,14 @@ for path in path_arr:
 SRC_PATH = os.path.join(PROJECT_PATH, "src")
 sys.path.append(SRC_PATH)
 
+
+# resources/ のパスを取得
+RESOURCES_PATH = os.path.join(PROJECT_PATH, "resources")
+
+
+
 # tile/の追加
 append_tile_path()
-
 
 if __name__ == "__main__":
     print(f"CURRENT_DIR_PATH: {os.path.split(CURRENT_DIR_PATH)}")

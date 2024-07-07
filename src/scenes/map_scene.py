@@ -1,11 +1,15 @@
+if __name__=="__main__":
+    import sys
+    import os
+    # src/ の追加
+    PATH_SRC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.append(PATH_SRC)
 import pyxel
-if __name__ == "__main__":  # noqa
-    from path_option import *
 from user_interface.tile_map import TileMap
 from scenes.scene import Scene
 from game_option import Option as Op
-from user_interface.draw_human import DrawHuman
 from resources.maptrees.sample_map_tree import sample_map_tree
+from user_interface.player import Player
 
 
 class MapScene(Scene):
@@ -14,9 +18,12 @@ class MapScene(Scene):
 
         # 画像関連
         TileMap.set_map("sample.pyxres")
-        self.human = DrawHuman(1)
-        self.human.look_down()  # 下向きに固定
-
+        # TODO: 専用のyamlを作成する
+        self.player = Player(chara_name="Slime",
+                            first_location_x=120,
+                            first_location_y=120,
+                            first_direction=2)
+        
         # 実行しているシーンを見極めるための変数
         self.execute_scene_name = "MapScene"
 
@@ -76,12 +83,8 @@ class MapScene(Scene):
                       node.tail_left, node.tail_top,
                       node.tail_width, node.tail_height)
 
-        # キャラクター
-        pyxel.bltm(self.map_tree[self.current_map_node_id].x * tail_length_w,
-                   self.map_tree[self.current_map_node_id].y * tail_length_h,
-                   0,
-                   self.human.get_tile_x, self.human.get_tile_y,
-                   16, 16, 0)
+        # キャラクターの描画
+        self.draw_object(self.player)
 
         # テキストボックス
         if self.text_box_flag:
