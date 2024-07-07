@@ -52,8 +52,8 @@ class MoveObject:
         self.__current_location_y = first_location_y
 
         # HPゲージの作成
-        self.__gauge_max_hp = max_hp
-        self.__gauge_hp = max_hp
+        self.__max_hp = max_hp
+        self.__current_hp = max_hp
 
     def update_direction(self, dirction: int):
         """オブジェクトの表示タイル更新関数.
@@ -94,7 +94,7 @@ class MoveObject:
         """HPの値を変更する関数.
         減らす場合は負の値を受け取る
         """
-        self.__gauge_hp += add_hp
+        self.__current_hp += add_hp
 
     @property
     def get_tile_coordi_x(self):
@@ -129,12 +129,12 @@ class MoveObject:
     @property
     def get_hp_current(self):
         """現在のHP返すGetter."""
-        return self.__gauge_hp
+        return self.__current_hp
 
     @property
     def get_hp_max(self):
         """現在のHP返すGetter."""
-        return self.__gauge_max_hp
+        return self.__max_hp
 
     @property
     def get_chara_size_x(self):
