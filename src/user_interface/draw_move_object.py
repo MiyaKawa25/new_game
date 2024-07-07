@@ -135,3 +135,13 @@ class DrawMoveObject:
     def get_hp_max(self):
         """現在のHP返すGetter."""
         return self.__gauge_max_hp
+
+    @property
+    def get_chara_size_x(self):
+        """キャラクターのXサイズを返すGetter."""
+        return self.__tile_size_x
+
+    @property
+    def get_chara_size_y(self):
+        """キャラクターのXサイズを返すGetter."""
+        return self.__tile_size_y

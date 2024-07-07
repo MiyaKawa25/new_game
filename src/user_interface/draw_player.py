@@ -18,29 +18,19 @@ class DrawPlayer(DrawMoveObject):
         with open(JSON_PATH, 'r') as f:
             data = json.load(f)
 
-        self.player_info = data.get(chara_name)
+        player_info = data.get(chara_name)
 
         # コンストラクタ
         super().__init__(
-            tile_coordi_top=self.player_info["coordi_top"],
-            tile_coordi_right=self.player_info["coordi_right"],
-            tile_coordi_bottom=self.player_info["coordi_bottom"],
-            tile_coordi_left=self.player_info["coordi_left"],
+            tile_coordi_top=player_info["coordi_top"],
+            tile_coordi_right=player_info["coordi_right"],
+            tile_coordi_bottom=player_info["coordi_bottom"],
+            tile_coordi_left=player_info["coordi_left"],
             first_direction=first_direction,
-            tile_size_x=self.player_info["size_x"],
-            tile_size_y=self.player_info["size_y"],
+            tile_size_x=player_info["size_x"],
+            tile_size_y=player_info["size_y"],
             first_location_x=first_location_x,
             first_location_y=first_location_y,
-            move_pixel=self.player_info["spd"],
-            max_hp=self.player_info["hp_max"]
+            move_pixel=player_info["spd"],
+            max_hp=player_info["hp_max"]
         )
-
-    @property
-    def get_chara_size_x(self):
-        """キャラクターのXサイズを返すGetter."""
-        return self.player_info["size_x"]
-
-    @property
-    def get_chara_size_y(self):
-        """キャラクターのXサイズを返すGetter."""
-        return self.player_info["size_y"]

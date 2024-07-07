@@ -96,6 +96,7 @@ class TestScene(Scene):
         # 複数の敵を表示
         for enemy in self.enemy_object_list:
             self.draw_object(enemy)
+            self.draw_object_hp(enemy)
 
     def draw_object(self, object):
         """オブジェクト描画用関数.

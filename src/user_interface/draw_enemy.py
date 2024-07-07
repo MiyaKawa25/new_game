@@ -19,19 +19,19 @@ class DrawEnemy(DrawMoveObject):
         with open(JSON_PATH, 'r') as f:
             data = json.load(f)
 
-        self.enemy_info = data.get(enemy_name)
+        enemy_info = data.get(enemy_name)
 
         # コンストラクタ
         super().__init__(
-            tile_coordi_top=self.enemy_info["coordi_top"],
-            tile_coordi_right=self.enemy_info["coordi_right"],
-            tile_coordi_bottom=self.enemy_info["coordi_bottom"],
-            tile_coordi_left=self.enemy_info["coordi_left"],
+            tile_coordi_top=enemy_info["coordi_top"],
+            tile_coordi_right=enemy_info["coordi_right"],
+            tile_coordi_bottom=enemy_info["coordi_bottom"],
+            tile_coordi_left=enemy_info["coordi_left"],
             first_direction=first_direction,
-            tile_size_x=self.enemy_info["size_x"],
-            tile_size_y=self.enemy_info["size_y"],
+            tile_size_x=enemy_info["size_x"],
+            tile_size_y=enemy_info["size_y"],
             first_location_x=first_location_x,
             first_location_y=first_location_y,
-            move_pixel=self.enemy_info["spd"],
-            max_hp=self.enemy_info["hp_max"]
+            move_pixel=enemy_info["spd"],
+            max_hp=enemy_info["hp_max"]
         )
