@@ -4,8 +4,8 @@ import json
 from user_interface.tile_map import TileMap
 from scenes.scene import Scene
 from game_option import Option as Op
-from user_interface.draw_player import DrawPlayer
-from user_interface.draw_enemy import DrawEnemy
+from user_interface.player import Player
+from user_interface.enemy import Enemy
 from user_interface.direction import Direction
 
 PROJECT_PATH = os.path.dirname(
@@ -15,15 +15,8 @@ STAGE_JSON_PATH = os.path.join(
 
 
 class TestScene(Scene):
-
-    ENEMY_LIST = ["Sheep"]
-    ENEMY_NUM_LIST = [2]
-
     def __init__(self):
         super().__init__()
-
-        self.player_list = ["Slime"]
-        self.enemy_list = TestScene.ENEMY_LIST
 
         # 画像関連
         TileMap.set_map("sample.pyxres")
@@ -43,10 +36,8 @@ class TestScene(Scene):
 
         # Player
         player = character_info["Player"]
-        self.control_character = DrawPlayer(chara_name=player["name"],
-                                            # 中心
+        self.control_character = Player(chara_name=player["name"],
                                             first_location_x=player["location_x"],
-                                            # 中心
                                             first_location_y=player["location_y"],
                                             first_direction=getattr(Direction, player["direction"]).value)
 
@@ -55,7 +46,7 @@ class TestScene(Scene):
         for key, value in character_info.items():
             if key == "Player":
                 continue
-            object = DrawEnemy(
+            object = Enemy(
                 enemy_name=value["name"],
                 first_location_x=value["location_x"],
                 first_location_y=value["location_y"],
@@ -97,48 +88,6 @@ class TestScene(Scene):
         for enemy in self.enemy_object_list:
             self.draw_object(enemy)
             self.draw_object_hp(enemy)
-
-    def draw_object(self, object):
-        """オブジェクト描画用関数.
-        """
-        # オブジェクトの表示
-        pyxel.bltm(object.get_current_location_x,
-                   object.get_current_location_y,
-                   0,
-                   object.get_tile_coordi_x, object.get_tile_coordi_y,
-                   object.get_tile_size_x, object.get_tile_size_y,
-                   0)
-
-    def draw_object_hp(self, object):
-        """オブジェクトのHPゲージを描画する関数.
-        pyxel.rect(左上x, 左上y, x幅, y幅, カラー)
-
-        # パレットカラー
-            https://note.com/syun77/n/nf0f094854644#:~:text=%E3%83%91%E3%83%AC%E3%83%83%E3%83%88%E3%82%AB%E3%83%A9%E3%83%BC%E3%81%AF%E4%BB%A5%E4%B8%8B%E3%81%AE%E3%82%82%E3%81%AE%E3%81%8C%E7%94%A8%E6%84%8F%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82
-        """
-        # HPゲージの表示
-        height_hp = 4
-        # 白(HPゲージ外枠)
-        pyxel.rect(object.get_current_location_x,
-                   object.get_current_location_y+object.get_chara_size_y,
-                   object.get_chara_size_x,
-                   height_hp,
-                   7)
-        # 黒(減HPを表す色)
-        hp_gauge_wide_max = object.get_chara_size_x - 2
-        pyxel.rect(object.get_current_location_x + 1,
-                   object.get_current_location_y+object.get_chara_size_y + 1,
-                   hp_gauge_wide_max,
-                   height_hp-2,
-                   0)
-        # 青(残HPを表す色)
-        hp_gauge_wide_current = int(
-            hp_gauge_wide_max * (object.get_hp_current / object.get_hp_max))
-        pyxel.rect(object.get_current_location_x + 1,
-                   object.get_current_location_y+object.get_chara_size_y + 1,
-                   hp_gauge_wide_current,
-                   height_hp-2,
-                   12)
 
     def next_scene(self):
         """次のシーンを返すメソッド."""

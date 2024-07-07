@@ -1,6 +1,6 @@
 {
     "Slime": {
-        "//1": "ステータス関連",
+        # ステータス関連
         "name": "Slime",
         "level": 1,
         "hp_max": 100,
@@ -8,8 +8,8 @@
         "atk": 80,
         "spd": 2,
 
-        "//2": "タイルマップ関連",
-        "///": "208(window_height+16)",
+        # タイルマップ関連"
+        # 208(window_height+16)
         "coordi_top": [16, 208],
         "coordi_right": [48, 208],
         "coordi_bottom": [0, 208],

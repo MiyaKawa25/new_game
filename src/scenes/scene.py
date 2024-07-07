@@ -49,3 +49,44 @@ class Scene:
             次のシーンインスタンス
         """
         return None
+
+    def draw_object(self, object):
+        """オブジェクト描画用関数."""
+        # オブジェクトの表示
+        pyxel.bltm(object.get_current_location_x,
+                   object.get_current_location_y,
+                   0,
+                   object.get_tile_coordi_x, object.get_tile_coordi_y,
+                   object.get_tile_size_x, object.get_tile_size_y,
+                   0)
+
+    def draw_object_hp(self, object):
+        """オブジェクトのHPゲージを描画する関数.
+        pyxel.rect(左上x, 左上y, x幅, y幅, カラー)
+
+        # パレットカラー
+            https://note.com/syun77/n/nf0f094854644#:~:text=パレットカラーは以下のものが用意されています。
+        """
+        # HPゲージの表示
+        height_hp = 4
+        # 白(HPゲージ外枠)
+        pyxel.rect(object.get_current_location_x,
+                   object.get_current_location_y+object.get_chara_size_y,
+                   object.get_chara_size_x,
+                   height_hp,
+                   7)
+        # 黒(減HPを表す色)
+        hp_gauge_wide_max = object.get_chara_size_x - 2
+        pyxel.rect(object.get_current_location_x + 1,
+                   object.get_current_location_y+object.get_chara_size_y + 1,
+                   hp_gauge_wide_max,
+                   height_hp-2,
+                   0)
+        # 青(残HPを表す色)
+        hp_gauge_wide_current = int(
+            hp_gauge_wide_max * (object.get_hp_current / object.get_hp_max))
+        pyxel.rect(object.get_current_location_x + 1,
+                   object.get_current_location_y+object.get_chara_size_y + 1,
+                   hp_gauge_wide_current,
+                   height_hp-2,
+                   12)

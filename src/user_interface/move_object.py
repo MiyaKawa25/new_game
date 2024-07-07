@@ -2,7 +2,7 @@ from user_interface.direction import Direction
 from game_option import Option as Op
 
 
-class DrawMoveObject:
+class MoveObject:
     """操作するキャラクターの描画する座標を管理するクラス."""
 
     def __init__(self,

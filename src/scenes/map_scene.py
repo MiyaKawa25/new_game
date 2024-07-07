@@ -1,15 +1,15 @@
+if __name__=="__main__":
+    import sys
+    import os
+    # src/ の追加
+    PATH_SRC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.append(PATH_SRC)
 import pyxel
-<<<<<<< HEAD
-from user_interface.image_manager import ImageManager
-=======
-if __name__ == "__main__":  # noqa
-    from path_option import *
 from user_interface.tile_map import TileMap
->>>>>>> main
 from scenes.scene import Scene
 from game_option import Option as Op
-from user_interface.draw_human import DrawHuman
 from resources.maptrees.sample_map_tree import sample_map_tree
+from user_interface.player import Player
 
 
 class MapScene(Scene):
@@ -18,9 +18,11 @@ class MapScene(Scene):
 
         # 画像関連
         TileMap.set_map("sample.pyxres")
-        self.human = DrawHuman(1)
-        self.human.look_down()  # 下向きに固定
-
+        self.player = Player(chara_name="Slime",
+                                first_location_x=120,
+                                first_location_y=120,
+                                first_direction="DOWN")
+        
         # 実行しているシーンを見極めるための変数
         self.execute_scene_name = "MapScene"
 
@@ -81,11 +83,12 @@ class MapScene(Scene):
                       node.tail_width, node.tail_height)
 
         # キャラクター
-        pyxel.bltm(self.map_tree[self.current_map_node_id].x * tail_length_w,
-                   self.map_tree[self.current_map_node_id].y * tail_length_h,
-                   0,
-                   self.human.get_tile_x, self.human.get_tile_y,
-                   16, 16, 0)
+        self.draw_object(self.player)
+        # pyxel.bltm(self.map_tree[self.current_map_node_id].x * tail_length_w,
+        #            self.map_tree[self.current_map_node_id].y * tail_length_h,
+        #            0,
+        #            self.human.get_tile_x, self.human.get_tile_y,
+        #            16, 16, 0)
 
         # テキストボックス
         if self.text_box_flag:
@@ -98,3 +101,9 @@ class MapScene(Scene):
     def next_scene(self):
         """次のシーンを返すメソッド."""
         return None
+
+
+if __name__ == "__main__":
+    pyxel.init(240, 180)  # (W, H)
+    map_scene = MapScene()
+    map_scene.update_flame()

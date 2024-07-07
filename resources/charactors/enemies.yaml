@@ -1,0 +1,19 @@
+{
+    "Sheep": {
+        "name": "Sheep",
+        "level": 1,
+        "hp_max": 80,
+        "hp_current": 80,
+        "atk": 20,
+        "spd": 20,
+    
+        "//": "タイルマップ関連",
+        "///": "224(window_height+16*2)",
+        "coordi_top": [16, 224],
+        "coordi_right": [48, 224],
+        "coordi_bottom": [0, 224],
+        "coordi_left": [32, 224],
+        "size_x": 16,
+        "size_y": 16
+    }
+}

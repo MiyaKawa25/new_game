@@ -1,8 +1,7 @@
 import os
 import json
 
-# from game_option import Option as Op
-from user_interface.draw_move_object import DrawMoveObject
+from user_interface.move_object import MoveObject
 
 PROJECT_PATH = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -10,7 +9,7 @@ JSON_PATH = os.path.join(PROJECT_PATH, "resources",
                          "charactors", "enemies.json")
 
 
-class DrawEnemy(DrawMoveObject):
+class Enemy(MoveObject):
     """操作するキャラクターの描画する座標を管理するクラス."""
 
     def __init__(self, enemy_name,

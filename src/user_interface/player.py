@@ -1,7 +1,7 @@
 import os
 import json
 
-from user_interface.draw_move_object import DrawMoveObject
+from user_interface.move_object import MoveObject
 
 PROJECT_PATH = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -9,7 +9,7 @@ JSON_PATH = os.path.join(PROJECT_PATH, "resources",
                          "charactors", "players.json")
 
 
-class DrawPlayer(DrawMoveObject):
+class Player(MoveObject):
     """操作するキャラクターの描画する座標を管理するクラス."""
 
     def __init__(self, chara_name,
@@ -19,6 +19,8 @@ class DrawPlayer(DrawMoveObject):
             data = json.load(f)
 
         player_info = data.get(chara_name)
+        print(f"chara_name: {chara_name}")
+        print(f"player_info: {player_info}")
 
         # コンストラクタ
         super().__init__(
