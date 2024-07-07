@@ -1,5 +1,3 @@
-from resources.maptrees.map_tree_node import MapTreeNode
-
 class MapTree:
     def __init__(self, nodes):
         self.nodes = nodes
