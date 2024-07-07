@@ -1,6 +1,6 @@
 import pyxel
 import os
-import json
+import yaml
 from user_interface.tile_map import TileMap
 from scenes.scene import Scene
 from game_option import Option as Op
@@ -10,8 +10,8 @@ from user_interface.direction import Direction
 
 PROJECT_PATH = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-STAGE_JSON_PATH = os.path.join(
-    PROJECT_PATH, "resources", "stage", "stage01.json")
+STAGE_YAML_PATH = os.path.join(
+    PROJECT_PATH, "resources", "stage", "stage01.yaml")
 
 
 class TestScene(Scene):
@@ -31,15 +31,15 @@ class TestScene(Scene):
 
     def create_object(self):
         """キャラクターオブジェクトを生成する関数."""
-        with open(STAGE_JSON_PATH, 'r') as f:
-            character_info = json.load(f)
+        with open(STAGE_YAML_PATH, 'r') as f:
+            character_info = yaml.safe_load(f)
 
         # Player
         player = character_info["Player"]
         self.control_character = Player(chara_name=player["name"],
                                             first_location_x=player["location_x"],
                                             first_location_y=player["location_y"],
-                                            first_direction=getattr(Direction, player["direction"]).value)
+                                            first_direction=Direction[player["direction"]].value)
 
         # Enemy
         # Jsonファイルに記述しているキャラのインスタンスを生成
@@ -50,7 +50,7 @@ class TestScene(Scene):
                 enemy_name=value["name"],
                 first_location_x=value["location_x"],
                 first_location_y=value["location_y"],
-                first_direction=getattr(Direction, value["direction"]).value)
+                first_direction=Direction[value["direction"]].value)
             self.enemy_object_list.append(object)
 
     def update(self):

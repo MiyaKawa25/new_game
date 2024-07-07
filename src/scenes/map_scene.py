@@ -21,7 +21,7 @@ class MapScene(Scene):
         self.player = Player(chara_name="Slime",
                                 first_location_x=120,
                                 first_location_y=120,
-                                first_direction="DOWN")
+                                first_direction=2)
         
         # 実行しているシーンを見極めるための変数
         self.execute_scene_name = "MapScene"
@@ -82,13 +82,8 @@ class MapScene(Scene):
                       node.tail_left, node.tail_top,
                       node.tail_width, node.tail_height)
 
-        # キャラクター
+        # キャラクターの描画
         self.draw_object(self.player)
-        # pyxel.bltm(self.map_tree[self.current_map_node_id].x * tail_length_w,
-        #            self.map_tree[self.current_map_node_id].y * tail_length_h,
-        #            0,
-        #            self.human.get_tile_x, self.human.get_tile_y,
-        #            16, 16, 0)
 
         # テキストボックス
         if self.text_box_flag:

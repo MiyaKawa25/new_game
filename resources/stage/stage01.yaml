@@ -7,7 +7,7 @@
         
     },
 
-    "1": {
+    "Enemy1": {
         "name": "Sheep",
         "location_x": 50,
         "location_y": 50,
@@ -15,7 +15,7 @@
         
     },
     
-    "2": {
+    "Enemy2": {
         "name": "Sheep",
         "location_x": 200,
         "location_y": 120,

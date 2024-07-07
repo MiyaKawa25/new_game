@@ -1,12 +1,12 @@
 import os
-import json
+import yaml
 
 from user_interface.move_object import MoveObject
 
 PROJECT_PATH = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-JSON_PATH = os.path.join(PROJECT_PATH, "resources",
-                         "charactors", "enemies.json")
+YAML_PATH = os.path.join(PROJECT_PATH, "resources",
+                         "charactors", "enemies.yaml")
 
 
 class Enemy(MoveObject):
@@ -15,10 +15,10 @@ class Enemy(MoveObject):
     def __init__(self, enemy_name,
                  first_location_x, first_location_y, first_direction):
 
-        with open(JSON_PATH, 'r') as f:
-            data = json.load(f)
+        with open(YAML_PATH, 'r') as f:
+            data = yaml.safe_load(f)
 
-        enemy_info = data.get(enemy_name)
+        enemy_info = data[enemy_name]
 
         # コンストラクタ
         super().__init__(

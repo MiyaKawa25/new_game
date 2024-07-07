@@ -1,12 +1,12 @@
 import os
-import json
+import yaml
 
 from user_interface.move_object import MoveObject
 
 PROJECT_PATH = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-JSON_PATH = os.path.join(PROJECT_PATH, "resources",
-                         "charactors", "players.json")
+YAML_PATH = os.path.join(PROJECT_PATH, "resources",
+                         "charactors", "players.yaml")
 
 
 class Player(MoveObject):
@@ -15,12 +15,10 @@ class Player(MoveObject):
     def __init__(self, chara_name,
                  first_location_x, first_location_y, first_direction):
 
-        with open(JSON_PATH, 'r') as f:
-            data = json.load(f)
+        with open(YAML_PATH, 'r') as f:
+            data = yaml.safe_load(f)
 
-        player_info = data.get(chara_name)
-        print(f"chara_name: {chara_name}")
-        print(f"player_info: {player_info}")
+        player_info = data[chara_name]
 
         # コンストラクタ
         super().__init__(
