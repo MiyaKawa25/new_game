@@ -36,9 +36,6 @@ test_scene:
 draw_human:
 	poetry run python3 src/interface/draw_human.py
 
-direction:
-	poetry run python3 src/user_interface/direction.py
-
 # テスト実行
 test:
 	poetry run pytest tests

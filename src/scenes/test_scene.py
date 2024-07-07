@@ -21,8 +21,8 @@ class TestScene(Scene):
         # 画像関連
         TileMap.set_map("sample.pyxres")
 
-        self.control_character = None
-        self.enemy_object_list = []
+        self.player = None
+        self.enemy_list = [] # enemyのインスタンスを格納していく
 
         # 実行しているシーンを見極めるための変数
         self.execute_scene_name = "Testscene"
@@ -35,11 +35,11 @@ class TestScene(Scene):
             character_info = yaml.safe_load(f)
 
         # Player
-        player = character_info["Player"]
-        self.control_character = Player(chara_name=player["name"],
-                                            first_location_x=player["location_x"],
-                                            first_location_y=player["location_y"],
-                                            first_direction=Direction[player["direction"]].value)
+        player_info = character_info["Player"]
+        self.player = Player(chara_name=player_info["name"],
+                                        first_location_x=player_info["location_x"],
+                                        first_location_y=player_info["location_y"],
+                                        first_direction=Direction[player_info["direction"]].value)
 
         # Enemy
         # Jsonファイルに記述しているキャラのインスタンスを生成
@@ -51,23 +51,24 @@ class TestScene(Scene):
                 first_location_x=value["location_x"],
                 first_location_y=value["location_y"],
                 first_direction=Direction[value["direction"]].value)
-            self.enemy_object_list.append(object)
+            self.enemy_list.append(object)
 
     def update(self):
         """ゲームの状態を更新する."""
-        push_key_flag = None  # Keyが押されたかの判断
+        direction_id = None  # Keyが押されたかの判断
+        
         if pyxel.btn(pyxel.KEY_UP):
-            push_key_flag = Direction.UP.value
+            direction_id = Direction.UP.value
         elif pyxel.btn(pyxel.KEY_RIGHT):
-            push_key_flag = Direction.RIGHT.value
+            direction_id = Direction.RIGHT.value
         elif pyxel.btn(pyxel.KEY_DOWN):
-            push_key_flag = Direction.DOWN.value
+            direction_id = Direction.DOWN.value
         elif pyxel.btn(pyxel.KEY_LEFT):
-            push_key_flag = Direction.LEFT.value
+            direction_id = Direction.LEFT.value
 
-        if push_key_flag is not None:
-            self.control_character.update_direction(push_key_flag)
-            self.control_character.move_object(push_key_flag)
+        if direction_id is not None:
+            self.player.update_direction(direction_id)
+            self.player.move_object(direction_id)
 
     def draw(self):
         """描画を行う関数.
@@ -81,11 +82,11 @@ class TestScene(Scene):
         pyxel.bltm(0, 0, 0, 0, 0, Op.window_w, Op.window_h)
 
         # 操作キャラ
-        self.draw_object(self.control_character)
-        self.draw_object_hp(self.control_character)
+        self.draw_object(self.player)
+        self.draw_object_hp(self.player)
 
         # 複数の敵を表示
-        for enemy in self.enemy_object_list:
+        for enemy in self.enemy_list:
             self.draw_object(enemy)
             self.draw_object_hp(enemy)
 

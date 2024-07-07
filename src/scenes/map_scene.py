@@ -18,10 +18,11 @@ class MapScene(Scene):
 
         # 画像関連
         TileMap.set_map("sample.pyxres")
+        # TODO: 専用のyamlを作成する
         self.player = Player(chara_name="Slime",
-                                first_location_x=120,
-                                first_location_y=120,
-                                first_direction=2)
+                            first_location_x=120,
+                            first_location_y=120,
+                            first_direction=2)
         
         # 実行しているシーンを見極めるための変数
         self.execute_scene_name = "MapScene"
