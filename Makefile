@@ -39,7 +39,7 @@ draw_human:
 
 # テスト実行
 test:
-	poetry run pytest
+	poetry run pytest tests
 
 # その他
 zikken:

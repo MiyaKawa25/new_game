@@ -2,11 +2,9 @@ import pyxel
 if __name__ == "__main__":  # noqa
     from path_option import *
 from user_interface.tile_map import TileMap
-from user_interface.image_manager import ImageManager
 from scenes.scene import Scene
 from game_option import Option as Op
 from user_interface.draw_human import DrawHuman
-from resources.maptrees.map_tree import MapTree
 from resources.maptrees.sample_map_tree import sample_map_tree
 
 
