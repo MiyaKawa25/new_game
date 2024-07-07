@@ -12,7 +12,7 @@ class MapTree:
         """最も近い上側の兄弟要素を取得する."""
         # 兄弟要素を抽出
         sibling_nodes = self.__filter_siblings(self.nodes, id)
-        # よりyが小さい(上方向)にある要素を抽出
+        # よりyが小さい(上方向にある)要素を抽出
         upper_sibling_nodes = [node for node in sibling_nodes if node.y <= self.nodes[id].y]
         if len(upper_sibling_nodes) < 1:
             return id
@@ -24,7 +24,7 @@ class MapTree:
         """最も近い下側の兄弟要素を取得する."""
         # 兄弟要素を抽出
         sibling_nodes = self.__filter_siblings(self.nodes, id)
-        # よりyが大きい(下方向)にある要素を抽出
+        # よりyが大きい(下方向にある)要素を抽出
         lowwer_sibling_nodes = [node for node in sibling_nodes if node.y >= self.nodes[id].y]
         if len(lowwer_sibling_nodes) < 1:
             return id

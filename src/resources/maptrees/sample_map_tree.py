@@ -1,7 +1,9 @@
 from resources.maptrees.map_tree import MapTree
 from resources.maptrees.map_tree_node import MapTreeNode
 
+# サンプル用のマップの定義
 sample_map_tree = MapTree([
+    # ノードID, ステージ名, x, y, 遷移可能なノードのID
     MapTreeNode(0, "1-1", 5, 12, [1]),
     MapTreeNode(1, "1-2", 10, 12, [2,3]),
     MapTreeNode(2, "A1-3", 15, 7, [4]),
